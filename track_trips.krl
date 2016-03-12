@@ -10,7 +10,6 @@ ruleset track_trips {
   }
   
   global {
-    long_trip = 1000
   }
 
   rule process_trip {
@@ -31,6 +30,7 @@ ruleset track_trips {
   rule find_long_trips {
     select when explicit trip_processed
     pre {
+      long_trip = 1000
       mileage = events:attrs("mileage")
     }
     always {
