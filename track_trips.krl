@@ -31,7 +31,7 @@ ruleset track_trips {
     select when explicit trip_processed
     pre {
       long_trip = 1000;
-      mileage = events:attr("mileage").defaultsTo(10, "could not get event").klog("Mileage: ");
+      mileage = event:attr("mileage").defaultsTo(10, "could not get event").klog("Mileage: ");
     }
     always {
       raise explicit event 'found_long_trip' 
