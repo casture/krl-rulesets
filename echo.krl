@@ -17,7 +17,7 @@ ruleset echo {
   }
   
   rule message {
-    select where echo message
+    select when echo message
     pre {
       input = event:attr("input")
     }
