@@ -23,7 +23,7 @@ ruleset track_trips {
     }
     fired {
       raise explicit event 'trip_processed'
-        attributes event:attr()
+        attributes event:attrs()
     }
   }
   
@@ -31,12 +31,11 @@ ruleset track_trips {
     select when explicit trip_processed
     pre {
       long_trip = 1000;
-      mileage = events:attr("mileage").defaultsTo(10, "could not get event").klog("Mileage: ");
+      mileage = events:attrs("mileage").defaultsTo(10, "could not get event").klog("Mileage: ");
     }
     always {
       raise explicit event 'found_long_trip' 
         with trip = mileage
-        if (mileage > long_trip);
     }
   }
 }
