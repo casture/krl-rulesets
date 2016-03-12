@@ -33,7 +33,9 @@ ruleset track_trips {
     pre {
       mileage = event:attr("mileage").defaultsTo(10, "could not get event").klog("Mileage: ");
     }
-    { noop() }
+    { send_directive("find_trip") with
+        long_trip_length = long_trip
+    }
     fired {
       raise explicit event 'found_long_trip' 
         with trip = mileage
