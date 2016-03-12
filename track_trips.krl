@@ -38,13 +38,8 @@ ruleset track_trips {
         long_trip_length = mileage
     }
     fired {
-      log "hello World";
       raise explicit event 'found_long_trip' 
         with trip = mileage;
-    } else {
-      log "Anit-hello world";
-      raise explicit event 'extremely_stupid'
-        with reason = "krl is dumb"
     }
   }
   
