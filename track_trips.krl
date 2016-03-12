@@ -39,7 +39,7 @@ ruleset track_trips {
     }
     fired {
       raise explicit event 'found_long_trip' 
-        with trip = mileage
+        with trip = mileage;
     }
   }
 }
