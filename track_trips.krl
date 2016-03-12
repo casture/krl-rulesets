@@ -10,6 +10,7 @@ ruleset track_trips {
   }
   
   global {
+    long_trip = 1000;
   }
 
   rule process_trip {
@@ -35,6 +36,7 @@ ruleset track_trips {
     always {
       raise explicit event 'found_long_trip' 
         with trip = mileage
+        if (mileage > long_trip);
     }
   }
 }
