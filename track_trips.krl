@@ -45,5 +45,13 @@ ruleset track_trips {
         with reason = "krl is dumb"
     }
   }
+  
+  rule fond_long_trip {
+    select when explicit found_long_trip
+    {
+      send_directive("found_trip") with
+        trip = "10000"
+    }
+  }
 }
 
