@@ -18,7 +18,10 @@ ruleset track_trips {
     pre {
       mileage = event:attr("mileage")
     }
-    noop();
+    {
+      send_directive("trip") with
+        trip_length = mileage
+    }
     fired {
       raise explicit event 'trip_processed'
         attributes event:attrs()
@@ -30,11 +33,8 @@ ruleset track_trips {
     pre {
       mileage = event:attr("mileage").defaultsTo(15, "dumbzzzzzz").klog("Mileage: ");
     }
-    { 
-      send_directive("find_trip") with
-        long_trip_length = mileage
-    }
-    fired {
+    noop();
+    always {
       raise explicit event 'found_long_trip' 
         with trip = mileage
         if (mileage > long_trip);
@@ -46,6 +46,7 @@ ruleset track_trips {
     pre {
       log "FOUND LONG TRIP"
     }
+    noop();
   }
 }
 
