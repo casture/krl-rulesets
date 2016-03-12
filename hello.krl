@@ -44,7 +44,7 @@ A first ruleset for the Quickstart
   }
   
   rule hello_world {
-    select when echo hello
+    select when echo helloz
     pre{
       id = event:attr("id").defaultsTo("_0","no id passed.");
       first = ent:name{[id,"name","first"]};
