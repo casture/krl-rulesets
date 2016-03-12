@@ -8,6 +8,10 @@ ruleset track_trips {
     author "Micah Weatherhead"
     logging on
   }
+  
+  global {
+    long_trip = 1000
+  }
 
   rule process_trip {
     select when car new_trip
@@ -23,4 +27,17 @@ ruleset track_trips {
         attributes event:attrs()
     }
   }
+  
+  rule find_long_trips {
+    select when explicit trip_processed
+    pre {
+      mileage = events:attrs("mileage")
+    }
+    always {
+      raise explicit event 'found_long_trip' 
+        with trip = mileage
+        if (mileage > long_trip);
+    }
+  }
 }
+
