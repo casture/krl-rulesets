@@ -15,4 +15,15 @@ ruleset echo {
         something = "Hello World"
     }
   }
+  
+  rule message {
+    select where echo message
+    pre {
+      input = event:attr("input")
+    }
+    {
+      send_directive("say") with
+        something = input
+    }
+  }
 }
