@@ -35,6 +35,7 @@ ruleset track_trips {
         long_trip_length = mileage
     }
     fired {
+      log "Long trip limit: "+long_trip;
       raise explicit event 'found_long_trip' 
         with trip = mileage
         if (mileage > long_trip);
