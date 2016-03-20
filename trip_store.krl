@@ -37,11 +37,10 @@ ruleset trip_store {
     always {
       set ent:trips ent:trips
           .defaultsTo([])
-          .slice(0)
-          .append({
+          .append([{
             "mileage": mileage,
             "timestamp": timestamp 
-          });
+          }]);
     }
   }
 
@@ -55,11 +54,10 @@ ruleset trip_store {
     always {
       set ent:long_trips ent:long_trips
           .defaultsTo([])
-          .slice(0)
-          .append({
+          .append([{
             "mileage": mileage,
             "timestamp": timestamp 
-          });
+          }]);
     }
   }
   
