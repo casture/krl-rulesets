@@ -20,7 +20,7 @@ ruleset trip_store {
     short_trips = function() {
       short_trips = ent:trips.filter(function(t){
         ent:long_trips.none(function(lt){
-          lt{"timestamp"} == t{"timestamp"}
+          false
         })
       });
       short_trips
