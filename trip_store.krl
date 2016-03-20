@@ -6,23 +6,69 @@ ruleset trip_store {
 >>
     author "Micah Weatherhead"
     logging on
+    sharing on
+    provides trips, long_trips, short_trips
+  }
+  
+  global {
+    trips = function() {
+      ent:trips
+    }
+    long_trips = function() {
+      ent:long_trips
+    }
+    short_trips = function() {
+      short_trips = ent:trips.filter(function(t){
+        ent:long_trips.none(function(lt){
+          lt{"timestamp"} == t{"timestamp"}
+        })
+      });
+      short_trips
+    }
   }
 
   rule collect_trips {
     select when explicit trip_processed
     pre {
       mileage = event:attr("mileage");
-      timestamp = event:attr("timestamp").klog("Timestamp: ");
+      timestamp = time:now();
     }
     noop();
     always {
-      set ent:processed_trips [] 
-        if not ent:processed_trips.length eq 0;
-      set ent:processed_trips.append({
-        "mileage": mileage,
-        "timestamp": timestamp 
-      });
+      set ent:trips ent:trips
+          .defaultsTo([])
+          .slice(0)
+          .append({
+            "mileage": mileage,
+            "timestamp": timestamp 
+          });
     }
   }
 
+  rule collect_long_trips {
+    select when explicit trip_processed
+    pre {
+      mileage = event:attr("mileage");
+      timestamp = time:now();
+    }
+    noop();
+    always {
+      set ent:long_trips ent:long_trips
+          .defaultsTo([])
+          .slice(0)
+          .append({
+            "mileage": mileage,
+            "timestamp": timestamp 
+          });
+    }
+  }
+  
+  rule clear_trips {
+    select when car trip_reset
+    noop();
+    always {
+      clear ent:trips;
+      clear ent:long_trips;
+    }
+  }
 }
