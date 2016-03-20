@@ -6,6 +6,7 @@ ruleset trip_store {
 >>
     author "Micah Weatherhead"
     logging on
+    sharing on
     provides trips, long_trips, short_trips
   }
   
