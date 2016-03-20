@@ -41,12 +41,6 @@ ruleset track_trips {
         if (mileage > long_trip);
     }
   }
-  
-  rule found_long_trip {
-    select when explicit found_long_trip
-    pre {
-      x = trip.klog("Long trip: ")
-    }
-  }
+
 }
 
