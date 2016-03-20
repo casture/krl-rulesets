@@ -46,7 +46,7 @@ ruleset trip_store {
   }
 
   rule collect_long_trips {
-    select when explicit trip_processed
+    select when explicit found_long_trip
     pre {
       mileage = event:attr("mileage");
       timestamp = time:now();
