@@ -1,5 +1,4 @@
 ruleset manage_fleet {
-
   meta {
     name "Track Trips"
     description <<
@@ -12,7 +11,9 @@ ruleset manage_fleet {
   }
 
   global {
-  
+    chicken = function() {
+      5
+    }
   }
   
   rule create_vehicle {
@@ -28,7 +29,7 @@ ruleset manage_fleet {
       with attrs = attributes.klog("attributes: "); // needs a name attribute for child
     }
     always {
-    
+      log "ehllo"
     }
   }
 }
