@@ -1,7 +1,14 @@
 ruleset manage_fleet {
 
   meta {
-  
+    name "Track Trips"
+    description <<
+2nd Ruleset for Reactive Pico lab
+>>
+    author "Micah Weatherhead"
+    logging on
+    
+    use module  b507199x5 alias wranglerOS
   }
 
   global {
