@@ -1,6 +1,6 @@
 ruleset manage_fleet {
   meta {
-    name "Track Trips"
+    name "Manage Fleet"
     description <<
 2nd Ruleset for Reactive Pico lab
 >>
