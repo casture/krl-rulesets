@@ -11,8 +11,14 @@ ruleset manage_fleet {
   }
 
   global {
-    chicken = function() {
-      5
+    trips = function() {
+      report = {};
+      results = wranglerOS:subscriptions();
+      subscriptions = results{"subscriptions"};
+      subscriptions.forEach(function(sub) {
+        trips = sub.trips();
+        report{sub.name} = trips;
+      })
     }
   }
   
