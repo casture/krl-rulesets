@@ -12,13 +12,13 @@ ruleset manage_fleet {
 
   global {
     trips = function() {
-      report = {};
       results = wranglerOS:subscriptions();
       subscriptions = results{"subscriptions"};
-      subscriptions.forEach(function(sub) {
-        trips = sub.trips();
-        report{sub.name} = trips;
-      })
+      report = subscriptions.map(function(res, sub) {
+        t = sub.trips();
+        res{sub{"name"}} = t;
+        res
+      }, {})
     }
   }
   
